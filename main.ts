@@ -1,9 +1,3 @@
-input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
-	
-})
-input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
-    basic.showString(CardKB.readLetter(characterFormat.ascii))
-})
 let code = 0
 let buffer: Buffer = null
 let i2cAdresse = pins.pins_i2cAdressen(pins.ei2cAdressen.CardKB_x5F)
