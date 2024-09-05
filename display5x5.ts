@@ -8,7 +8,7 @@ namespace display5x5 {
 
     let n5x5_setClearScreen = true // wenn ein Image angezeigt wird, merken dass z.B. Funkgruppe wieder angezeigt werden muss
 
-    //% group="BIN" subcategory="LEDs, Display"
+    //% group="BIN"
     //% block="setClearScreen" weight=9
     export function setClearScreen() {
         n5x5_setClearScreen = true
@@ -29,7 +29,7 @@ namespace display5x5 {
         }
      */
 
-    //% group="BIN" subcategory="LEDs, Display"
+    //% group="BIN"
     //% block="zeige ↑↑... x0 %x0y0 x1 %x1y0" weight=8
     //% x0y0.shadow=toggleOnOff
     //% x1y0.shadow=toggleOnOff
@@ -56,7 +56,7 @@ namespace display5x5 {
         map
     }
 
-    //% group="BIN" subcategory="LEDs, Display"
+    //% group="BIN"
     //% block="zeige ↕↕↕↕↕ %int %format ←x %xLed" weight=3
     //% xLed.min=0 xLed.max=4 xLed.defl=4
     export function zeigeBIN(int: number, format: ePlot, xLed: number) {
@@ -110,7 +110,7 @@ namespace display5x5 {
         }
     }
 
-    // group="BIN" subcategory="LEDs, Display"
+    // group="BIN"
     // block="zeige ↕↕↕↕↕ %int255 map255 ←x %xLed" weight=2
     // int255.min=0 int255.max=255 
     // xLed.min=0 xLed.max=4 xLed.defl=4
@@ -124,7 +124,7 @@ namespace display5x5 {
 
     let n_showString = ""
 
-    //% group="Text" subcategory="LEDs, Display"
+    //% group="Text"
     //% block="zeige Text wenn geändert %text" weight=1
     //% text.shadow="btf_text"
     export function zeigeText(text: any) {
@@ -142,19 +142,20 @@ namespace display5x5 {
     }
 
 
+
+    // ========== group="Funktionen"
+
     //% blockId=btf_text block="%s" blockHidden=true
     export function btf_text(s: string): string { return s }
 
 
-    //% group="Funktionen" advanced=true
+    //% group="Funktionen"
     //% block="%i0 zwischen %i1 und %i2" weight=6
     export function between(i0: number, i1: number, i2: number): boolean {
         return (i0 >= i1 && i0 <= i2)
     }
 
-
-
-    //% group="Funktionen" advanced=true
+    //% group="Funktionen"
     //% block="mapInt32 %value|from low %fromLow|high %fromHigh|to low %toLow|high %toHigh" weight=3
     //% fromLow.defl=1 fromHigh.defl=255 toLow.defl=-100 toHigh.defl=100
     //% inlineInputMode=inline
