@@ -2,7 +2,9 @@
     "name": "cardkb-63",
     "description": "",
     "dependencies": {
-        "core": "*"
+        "core": "*",
+        "pxt-cardkb": "github:MKleinSB/pxt-CardKB#v0.0.2",
+        "pins": "github:calliope-net/pins#v1.0.0"
     },
     "files": [
         "main.blocks",
@@ -13,7 +15,7 @@
         "test.ts"
     ],
     "targetVersions": {
-        "target": "4.0.29",
+        "target": "6.0.41",
         "targetId": "calliopemini"
     },
     "supportedTargets": [
