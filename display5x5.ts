@@ -1,17 +1,18 @@
 
-namespace display5x5 {
-
-
-
+namespace basic {
 
     // ========== group="25 LED Display" advanced=true color=#54C9C9
 
-    let n5x5_setClearScreen = true // wenn ein Image angezeigt wird, merken dass z.B. Funkgruppe wieder angezeigt werden muss
+  //  let n5x5_setClearScreen = true // wenn ein Image angezeigt wird, merken dass z.B. Funkgruppe wieder angezeigt werden muss
 
-    //% group="BIN"
-    //% block="setClearScreen" weight=9
+    //% group="BIN" subcategory="25 LED Display"
+    //% block="lösche 25 LED Display" weight=9
     export function setClearScreen() {
-        n5x5_setClearScreen = true
+       // n5x5_setClearScreen = true
+        a5x5_xBuffer.fill(0xFF) // mit ungültigen Werten füllen, die rekursiv wieder zu 0 werden
+        for (let x = 4; x >= 0; x--) {
+            zeigeBIN(0, ePlot.bin, x)
+        }
     }
 
     //let n5x5_x01y0 = 0 // Bit 5-4 Betriebsart in x=0-1 y=0
@@ -19,17 +20,8 @@ namespace display5x5 {
     let a5x5_xBuffer = Buffer.create(5)
 
     // ↕↕...
-    /*     export function zeigeFunkgruppe() {
-            let int = getStorageFunkgruppe()
-            if (between(int, c_funkgruppe_min, c_funkgruppe_max)) {
-                // zeigeBIN(getStorageFunkgruppe() << 4, ePlot.hex, 1) // 5x5 x=0-1 y=1-2-3-4 (y=0 ist bei hex immer aus)
-                int = [0x10, 0x30, 0x70, 0xF0, 0xF1, 0xF3, 0xF7, 0xFF][getStorageFunkgruppe() & 0x07] // 3 Bit 0..7 als Index
-            }
-            zeigeBIN(int, ePlot.hex, 1) // 5x5 x=0-1 y=1-2-3-4 (y=0 ist bei hex immer aus)
-        }
-     */
-
-    //% group="BIN"
+  
+    //% group="BIN" subcategory="25 LED Display"
     //% block="zeige ↑↑... x0 %x0y0 x1 %x1y0" weight=8
     //% x0y0.shadow=toggleOnOff
     //% x1y0.shadow=toggleOnOff
@@ -56,7 +48,7 @@ namespace display5x5 {
         map
     }
 
-    //% group="BIN"
+    //% group="BIN" subcategory="25 LED Display"
     //% block="zeige ↕↕↕↕↕ %int %format ←x %xLed" weight=3
     //% xLed.min=0 xLed.max=4 xLed.defl=4
     export function zeigeBIN(int: number, format: ePlot, xLed: number) {
@@ -66,7 +58,7 @@ namespace display5x5 {
         if (format == ePlot.bin && between(xLed, 0, 4)) {
 
             // pro Ziffer werden mit zeigeBIN immer 5 LEDs geschaltet 0..31
-            if (n5x5_setClearScreen) {  // wenn vorher Image oder Text angezeigt wurde
+           /*  if (n5x5_setClearScreen) {  // wenn vorher Image oder Text angezeigt wurde
                 n5x5_setClearScreen = false
                 a5x5_xBuffer.fill(0xFF) // mit ungültigen Werten füllen, die rekursiv wieder zu 0 werden
                 for (let x = 4; x >= 0; x--) {
@@ -75,7 +67,7 @@ namespace display5x5 {
                 // basic.clearScreen()     // löschen und Funkgruppe in 01 ↕↕... wieder anzeigen
                 //zeigeFunkgruppe()       // !ruft zeigeBIN rekursiv auf!
                 //a5x5_x01y0 = [false, false] // n5x5_x01y0 = 0 // Betriebsart auch neu anzeigen nach clearScreen
-            }
+            } */
             // nur bei Änderung
             if (a5x5_xBuffer[xLed] != int) {
                 a5x5_xBuffer[xLed] = int
@@ -110,7 +102,7 @@ namespace display5x5 {
         }
     }
 
-    // group="BIN"
+    // group="BIN" subcategory="25 LED Display"
     // block="zeige ↕↕↕↕↕ %int255 map255 ←x %xLed" weight=2
     // int255.min=0 int255.max=255 
     // xLed.min=0 xLed.max=4 xLed.defl=4
@@ -124,7 +116,7 @@ namespace display5x5 {
 
     let n_showString = ""
 
-    //% group="Text"
+    //% group="Text" subcategory="25 LED Display"
     //% block="zeige Text wenn geändert %text" weight=1
     //% text.shadow="btf_text"
     export function zeigeText(text: any) {
@@ -148,14 +140,24 @@ namespace display5x5 {
     //% blockId=btf_text block="%s" blockHidden=true
     export function btf_text(s: string): string { return s }
 
+    //% group="Funktionen" subcategory="25 LED Display"
+    //% block="// %text" weight=9
+    //% text.shadow="btf_text"
+    export function comment(text: any): void { }
 
-    //% group="Funktionen"
+    //% group="Funktionen" subcategory="25 LED Display"
+    //% block="Simulator" weight=7
+    export function simulator() {
+        return "€".charCodeAt(0) == 8364
+    }
+
+    //% group="Funktionen" subcategory="25 LED Display"
     //% block="%i0 zwischen %i1 und %i2" weight=6
     export function between(i0: number, i1: number, i2: number): boolean {
         return (i0 >= i1 && i0 <= i2)
     }
 
-    //% group="Funktionen"
+    //% group="Funktionen" subcategory="25 LED Display"
     //% block="mapInt32 %value|from low %fromLow|high %fromHigh|to low %toLow|high %toHigh" weight=3
     //% fromLow.defl=1 fromHigh.defl=255 toLow.defl=-100 toHigh.defl=100
     //% inlineInputMode=inline
