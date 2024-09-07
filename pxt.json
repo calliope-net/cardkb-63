@@ -5,13 +5,13 @@
     "dependencies": {
         "core": "*",
         "pins": "github:calliope-net/pins#v1.0.1",
-        "v3": "*"
+        "v3": "*",
+        "basic": "github:calliope-net/basic#v0.0.1"
     },
     "files": [
         "main.blocks",
         "main.ts",
-        "README.md",
-        "display5x5.ts"
+        "README.md"
     ],
     "testFiles": [
         "test.ts"
